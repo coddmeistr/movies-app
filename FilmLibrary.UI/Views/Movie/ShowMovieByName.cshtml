@@ -1,0 +1,29 @@
+﻿@model FilmLibrary.Models.Models.MovieViewModel
+
+<div>
+    <h3 style="margin-bottom: 20px">@Model.Name</h3>
+    <p><b>Name:</b> @Model.Name</p>
+    <p><b>Discription:</b> @Model.Description</p>
+    <p><b>Articul:</b> @Model.Articul</p>
+    <p><b>Artists:</b>
+    @foreach(var artist in Model.Artists)
+    {
+        <text>@artist.Name </text>
+    }
+    </p>
+    <p><b>Genres:</b>
+    @{
+        int a = 1;
+     }
+    @foreach(var genre in Model.Genres)
+    {
+        if (a != 1)
+        {
+            <text>, </text>;
+        }
+        <text>@genre.Name</text>
+        a++;
+    }
+    </p>
+</div>
+<div style="margin-top:30px; margin-left:15px"><a style="color:chocolate" asp-controller="Home" asp-action="LaunchStartPage">Back</a></div>

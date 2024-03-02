@@ -1,0 +1,27 @@
+﻿@model FilmLibrary.Models.Models.FavouriteMoviesCollectionViewModel
+
+<div>
+        <h3>Favourite movies</h3>
+        @if (Model.Movies.Count == 0)
+        {
+            <text>There is no movies in your favourite list. You can add them now</text>
+        }
+        else
+        {
+            <table>
+            <tr class="header"><th width="450"><p>Name</p></th>
+                <th width="450"><p>Discription</p></th>
+                <th width="450"><p>Articul</p></th><td></td>
+            </tr>
+            @foreach (var movie in Model.Movies)
+            {
+            <tr>
+                <td><a asp-controller="Movie" asp-action="ShowMovieByName" asp-route-name="@movie.Name">@movie.Name</a></td>
+                <td><p>@movie.Description</p></td>
+                <td><p>@movie.Articul</p></td>
+            </tr>
+            }
+            </table>
+        }
+        <div style="margin-top:30px; margin-left:15px"><a style="color:chocolate" asp-controller="Home" asp-action="LaunchStartPage">Back</a></div>
+</div>

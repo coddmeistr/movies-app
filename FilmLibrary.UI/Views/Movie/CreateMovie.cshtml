@@ -1,0 +1,44 @@
+﻿@model FilmLibrary.Models.Models.CreateMovieModel
+ 
+<h2>Add movie to common collection</h2>
+ 
+<form asp-action="CreateMovie" asp-controller="Movie" asp-anti-forgery="true">
+    <div class="validation" asp-validation-summary="ModelOnly"></div>
+    <div>
+        <div style="margin-bottom: 20px" class="form-group">
+            <label style="width:200px" asp-for="Name">Enter name</label>
+            <input type="text" asp-for="Name" required/>
+            <span asp-validation-for="Name" />
+        </div>
+        <div style="margin-bottom: 20px" class="form-group">
+            <label style="width:200px" asp-for="Description">Enter description</label>
+            <input type="text" asp-for="Description" required/>
+            <span asp-validation-for="Description" />
+        </div>
+        <div style="margin-bottom: 20px" class="form-group">
+            <label style="width:200px" asp-for="Articul">Enter articul</label>
+            <input type="text" asp-for="Articul" required/>
+            <span asp-validation-for="Articul" />
+        </div>
+        <p>Enter actors (at least one)</p>
+        <div style="margin-bottom: 20px" class="form-group">
+            <label style="width:200px" asp-for="FirstArtist">Enter first actor</label>
+            <input type="text" asp-for="FirstArtist" />
+            <span asp-validation-for="FirstArtist" />
+        </div>
+        <div style="margin-bottom: 20px" class="form-group">
+            <label style="width:200px" asp-for="SecondArtist">Enter second actor</label>
+            <input type="text" asp-for="SecondArtist" />
+            <span asp-validation-for="SecondArtist" />
+        </div>
+        <div>
+            <label style="width:200px" asp-for="GenresId">Choose genres</label>
+            <select multiple asp-for="GenresId" asp-items="ViewBag.Genres" required></select>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Add" class="btn btn-outline-dark" />
+        </div>
+    </div>
+</form>
+
+<div style="margin-top:30px; margin-left:10px"><a style="color:chocolate" asp-controller="Home" asp-action="LaunchStartPage">Back</a></div>

@@ -1,0 +1,103 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@model FilmLibrary.Models.Models.UserViewModel
+
+@if (!string.IsNullOrEmpty(Model.UserName))
+{
+    <h3>All user movies</h3>
+    <div>
+        <table>
+            <tr class="header"><th width="450"><p>Name</p></th>
+                <th width="450"><p>Discription</p></th>
+                <th width="150"><p>Articul</p></th><td></td>
+            </tr>
+            @foreach (var movieStatus in Model.MovieStatusDictionary)
+            {
+            <tr>
+                <td><a asp-controller="Movie" asp-action="ShowMovieByName" asp-route-name="@movieStatus.Key.Name">@movieStatus.Key.Name</a></td>
+                <td><p>@movieStatus.Key.Description</p></td>
+                <td><p>@movieStatus.Key.Articul</p></td>
+            </tr>
+            }
+        </table>
+    </div>
+}
+else
+{
+    @if (Model.Role.ToString().Equals("customer"))
+{
+    <div>
+        <h3>All movies <a style="margin-left:20px; text-decoration:underline" asp-controller="Movie" asp-action="ShowUserFavouriteMovies">Show favourite movies</a></h3>
+        
+        <table>
+            <tr class="header"><th width="450"><p>Name</p></th>
+                <th width="450"><p>Discription</p></th>
+                <th width="150"><p>Articul</p></th><td></td>
+                <th width="50"></th>
+            </tr>
+            @{ int i = 0; } 
+            @foreach (var movieStatus in Model.MovieStatusDictionary)
+            {
+            <tr>
+                <td><a asp-controller="Movie" asp-action="ShowMovieByName" asp-route-name="@movieStatus.Key.Name">@movieStatus.Key.Name</a></td>
+                <td><p>@movieStatus.Key.Description</p></td>
+                <td><p>@movieStatus.Key.Articul</p></td>
+                <td>
+                        @{
+                            if (Model.MovieStatusDictionary[movieStatus.Key])
+                            {
+                                <a asp-controller="Movie" asp-action="AddMovieToFavouriteCollection" asp-route-movieName="@movieStatus.Key.Name">★</a>
+                            }
+                            else
+                            {
+                                <a asp-controller="Movie" asp-action="AddMovieToFavouriteCollection" asp-route-movieName="@movieStatus.Key.Name">☆</a>
+                            }
+                            i++;
+                        }
+                </td>
+            </tr>
+            }
+       </table>
+    </div>
+}
+else
+{
+     <div style="margin-bottom: 50px">
+        <h3>All movies  <a style="margin-left:20px; text-decoration:underline" asp-controller="Movie" asp-action="CreateMovie">Add new movie</a></h3>
+        <table>
+            <tr class="header"><th width="450"><p>Name</p></th>
+                <th width="450"><p>Discription</p></th>
+                <th width="100"><p style="">Articul</p></th><td></td>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach (var movieStatus in Model.MovieStatusDictionary)
+            {
+            <tr>
+                <td><a asp-controller="Movie" asp-action="ShowMovieByName" asp-route-name="@movieStatus.Key.Name">@movieStatus.Key.Name</a></td>
+                <td><p>@movieStatus.Key.Description</p></td>
+                <td><p>@movieStatus.Key.Articul</p></td>
+                <td width="50"><a asp-controller="Movie" asp-action="EditMovieInfo" asp-route-movieName="@movieStatus.Key.Name">Edit</a></td>
+                <td><a asp-controller="Movie" asp-action="DeleteMovieFromGeneralList" asp-route-movieName="@movieStatus.Key.Name">Remove</a></td>
+            </tr>
+            }
+       </table>
+    </div>
+    <div>
+        
+    <form asp-action="ShowUserFavouriteMovies" asp-controller="Movie" asp-anti-forgery="true">
+    <div class="validation" asp-validation-summary="ModelOnly"></div>
+        <div style="margin-bottom: 20px">
+            <label asp-for="UserName">Choose user to see their favourite movies</label>
+            <select asp-for="UserName" asp-items="ViewBag.AllUsers" size="1"></select>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Show user movies" class="btn btn-outline-dark" />
+        </div>
+    </form>
+
+    </div>
+}
+}

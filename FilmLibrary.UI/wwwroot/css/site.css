@@ -1,0 +1,31 @@
+html {
+  font-size: 28px;
+}
+
+* {
+    color: slategrey;
+}
+
+@media (min-width: 768px) {
+    a {
+        color: rgb(184, 134, 11);
+        text-decoration: none;
+    }
+    a:hover {
+        color:coral;
+    }
+  html {
+    font-size: 18px;
+    color: slategrey;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+  background-color: antiquewhite;
+}
